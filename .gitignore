@@ -9,3 +9,5 @@ vite.config.ts.timestamp-*
 .vite
 .eslintcache
 
+# Reference solutions (for grading/screenshots; not distributed to students)
+solutions/

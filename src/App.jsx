@@ -1,9 +1,11 @@
 import { useState, useEffect, useCallback } from "react";
 import LazyProblem from "./components/LazyProblem.jsx";
 import ProblemNavbar from "./components/ProblemNavbar.jsx";
+import { USE_SOLUTIONS } from "./config.jsx";
 
-// Discover all problem-*.jsx files in ./problems/ – add a new file there to add a problem (no other config).
+// Discover problem and solution modules (add problem-N.jsx / solution-N.jsx to add a problem).
 const problemModules = import.meta.glob("./problems/problem-*.jsx");
+const solutionModules = import.meta.glob("../solutions/problem-*.jsx");
 
 const problemIds = Object.keys(problemModules).sort((a, b) => {
   const n1 = parseInt(a.match(/\d+/)?.[0] || "0", 10);
@@ -37,6 +39,7 @@ function App() {
   });
 
   const [navVisible, setNavVisible] = useState(true);
+  const [useSolutions, setUseSolutions] = useState(USE_SOLUTIONS);
 
   useEffect(() => {
     if (selectedId) setStoredProblemId(selectedId);
@@ -66,10 +69,17 @@ function App() {
         selectedId={selectedId}
         onChange={handleProblemChange}
         visible={navVisible}
+        useSolutions={useSolutions}
+        onSolutionToggle={setUseSolutions}
       />
 
       <main className={navVisible ? "main-content" : "main-content nav-hidden"}>
-        <LazyProblem selectedId={selectedId} problemModules={problemModules} />
+        <LazyProblem
+          selectedId={selectedId}
+          problemModules={problemModules}
+          solutionModules={solutionModules}
+          useSolutions={useSolutions}
+        />
       </main>
     </div>
   );

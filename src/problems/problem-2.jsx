@@ -1,39 +1,37 @@
-import { useState } from "react";
-function Problem2() {
-  // You need to:
-  // 1. Render a <select> dropdown that lets the user pick a month. Set its value to the 'selectedMonth' state.
-  // 2. When a user selects a month, update the state using setSelectedMonth(e.target.value).
-  // 3. Display all the months in a <ul><li>...</li></ul> list.
-  // 4. Bold (<b>) the month in the list that matches the selected month.
-  //    For example: if "Jun" is selected, <li><b>Jun</b></li> should appear.
-  // You can use map to iterate over the months array for both <option> elements and <li> elements.
-  // To make a dropdown option with value 'month', use: <option value={month}>{month}</option>
-  // Remember to check if (month === selectedMonth) when rendering your <li> so you know which one to bold.
+/**
+ * Problem 2: Creating components
+ *
+ * Create a reusable PuzzlePiece component that receives a piece prop and renders one piece.
+ * Then render all pieces using .map().
+ *
+ * TASKS:
+ * 1. Create a function PuzzlePiece({ piece }) that returns a <div> with the piece label and background color.
+ * 2. Build the pieces array (same as Problem 1).
+ * 3. Render pieces in a flex container using pieces.map() and <PuzzlePiece key={piece.id} piece={piece} />.
+ */
 
-  const [selectedMonth, setSelectedMonth] = useState(null);
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const COLORS = ["#f97316", "#22c55e", "#3b82f6", "#eab308"];
+
+// TODO: Create PuzzlePiece component. It receives { piece } (object with id, label, color). Return a <div> with style={{ backgroundColor: piece.color }} and content {piece.label}. Add classes for size and centering (e.g. inline-flex items-center justify-center w-20 h-20 rounded-lg text-white font-bold shadow).
+function PuzzlePiece({ piece }) {
+  return null;
+}
+
+function Problem2() {
+  // TODO: Build `pieces` array — same as Problem 1: [0,1,2,3].map((id) => ({ id, label: `${id + 1}`, color: COLORS[id] })).
+  const pieces = [];
 
   return (
-    <section className="problem-view p-2">
-      <h2>Problem 2</h2>
-      <p> Have a dropdown with the months of the year. Based on what is selected, bold the current month.</p>
+    <section className="problem-view p-6">
+      <h2 className="text-xl font-semibold mb-2">Problem 2: Creating components</h2>
+      <p className="text-gray-700 mb-4">
+        Create a <code>PuzzlePiece</code> component and render all pieces using .map().
+      </p>
 
-      {/* Solution */}
-      {selectedMonth && <p className="text-lg my-5">Selected month: {selectedMonth}</p>}
-      <select className="py-5 text-lg" value={selectedMonth} onChange={(e) => setSelectedMonth(e.target.value)}>
-        {months.map((month) => (
-          <option key={month} value={month}>{month}</option>
-        ))}
-      </select>
-      <hr/>
-      <ul className="mt-5 text-lg">
-        {months.map((month, index) => (
-          <li key={index}>
-            {month === selectedMonth ? <b>{month}</b> : month}
-          </li>
-        ))}
-      </ul>
-
+      {/* TODO: Render a div with className "flex flex-wrap gap-3". Inside, map over pieces and render <PuzzlePiece key={piece.id} piece={piece} /> for each. */}
+      <div className="flex flex-wrap gap-3">
+        {/* ... */}
+      </div>
     </section>
   );
 }

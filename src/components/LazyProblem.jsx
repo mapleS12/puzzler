@@ -1,6 +1,6 @@
 import { Suspense, lazy } from "react";
 
-function LazyProblem({ selectedId, problemModules }) {
+function LazyProblem({ selectedId, problemModules, solutionModules, useSolutions }) {
   if (!selectedId) {
     return (
       <section>
@@ -12,13 +12,17 @@ function LazyProblem({ selectedId, problemModules }) {
     );
   }
 
-  const LazyComponent = lazy(problemModules[selectedId]);
+  const solutionPath = selectedId.replace("./problems/", "../solutions/");
+  const moduleToLoad =
+    useSolutions && solutionModules[solutionPath] ? solutionModules[solutionPath] : problemModules[selectedId];
+
+  const LazyComponent = lazy(moduleToLoad);
 
   return (
     <Suspense
       fallback={
         <section>
-          <p>Loading problem…</p>
+          <p>Loading {useSolutions ? "solution" : "problem"}…</p>
         </section>
       }
     >

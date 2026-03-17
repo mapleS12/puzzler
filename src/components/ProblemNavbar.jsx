@@ -5,7 +5,7 @@ function getProblemLabel(path) {
   return num ? `Problem ${num}` : path.replace(/^.*\//, "").replace(/\.jsx$/, "");
 }
 
-function ProblemNavbar({ problemIds, selectedId, onChange, visible }) {
+function ProblemNavbar({ problemIds, selectedId, onChange, visible, useSolutions, onSolutionToggle }) {
   const handleChange = (e) => {
     const id = e.target.value;
     if (id && problemIds.includes(id)) onChange(id);
@@ -36,6 +36,19 @@ function ProblemNavbar({ problemIds, selectedId, onChange, visible }) {
           )}
         </select>
       </div>
+      {onSolutionToggle != null && (
+        <div className="problem-navbar__solution-toggle">
+          <label>
+            <input
+              type="checkbox"
+              checked={!!useSolutions}
+              onChange={(e) => onSolutionToggle(e.target.checked)}
+              aria-label="Show solution instead of problem"
+            />
+            Show solution
+          </label>
+        </div>
+      )}
     </header>
   );
 }

@@ -6,6 +6,7 @@
   height: 40px;
   display: flex;
   align-items: center;
+  gap: 1.5rem;
   padding: 0 0.75rem;
   border-bottom: 1px solid #dddddd;
   font-size: 0.9rem;
@@ -28,5 +29,17 @@
 }
 
 .problem-navbar__selector select {
+  font-size: 0.9rem;
+}
+
+.problem-navbar__solution-toggle {
+  margin-left: auto;
+}
+
+.problem-navbar__solution-toggle label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
   font-size: 0.9rem;
 }

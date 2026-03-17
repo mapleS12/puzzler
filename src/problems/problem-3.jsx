@@ -1,79 +1,48 @@
-import "../components/informationcard.css";
-import { useState } from "react";
-function Problem3() {
-  const months = 12;
-  const [desiredPeak, setDesiredPeak] = useState(3);
-  const bellCenter = 6;  // fixed center for math (July)
-  const stdDev = 2;      // bell spread
+/**
+ * Problem 3: Moving data between components
+ *
+ * The parent (Problem3) holds the puzzle data and passes it to a Board component via props.
+ * Board receives pieces and passes each piece to PuzzlePiece. Data flows: Problem3 → Board → PuzzlePiece.
+ *
+ * For this problem, the puzzle piece data is provided for you in src/config.jsx as PUZZLE_PIECES_P3.
+ * Your job is to move that data between components, not to build it.
+ *
+ * TASKS:
+ * 1. Create a Board component that receives a prop pieces and renders a grid of <PuzzlePiece> components (map over pieces).
+ * 2. In Problem3, read PUZZLE_PIECES_P3 from config and pass it to <Board pieces={pieces} />.
+ */
 
-  // Thresholds
-  const unavailableThreshold = 0.25; // below this, month is unavailable
-  const peakThreshold = 0.75;        // above this, month is peak
+import { PUZZLE_PIECES_P3 } from "../config.jsx";
 
-  // Gaussian function
-  function gaussian(x, mean, stdDev) {
-    return Math.exp(-0.5 * ((x - mean) / stdDev) ** 2);
-  }
-
-  // Step 1: Generate bell curve centered at bellCenter
-  let bellCurve = Array.from({ length: months }, (_, i) =>
-    gaussian(i, bellCenter, stdDev)
+function PuzzlePiece({ piece }) {
+  return (
+    <div
+      className="inline-flex items-center justify-center w-20 h-20 rounded-lg text-white font-bold shadow"
+      style={{ backgroundColor: piece.color }}
+    >
+      {piece.label}
+    </div>
   );
+}
 
-  // Step 2: Normalize to [0,1]
-  const maxValue = Math.max(...bellCurve);
-  bellCurve = bellCurve.map(v => v / maxValue);
+// TODO: Create Board component that receives { pieces }. Return a div with className "grid grid-cols-2 gap-3 w-fit". Inside, map over pieces and render <PuzzlePiece key={piece.id} piece={piece} /> for each.
+function Board({ pieces }) {
+  return null;
+}
 
-  // Step 3: Rotate the bell curve so the peak is at desiredPeak
-  function rotateArray(arr, shift) {
-    const n = arr.length;
-    const s = ((shift % n) + n) % n; // ensure positive modulo
-    return arr.slice(n - s).concat(arr.slice(0, n - s));
-  }
-
-  const shiftAmount = (desiredPeak - bellCenter + months) % months;
-  bellCurve = rotateArray(bellCurve, shiftAmount);
-
-  // Step 4: Assign labels with thresholds and side-of-peak
-  const monthStatus = bellCurve.map((value, i) => {
-    if (value < unavailableThreshold) return "unavailable"; // too low
-    if (value >= peakThreshold) return "peak";             // high enough for peak
-
-    // Middle values: early or late based on distance to peak
-    const clockwiseDist = (i - desiredPeak + months) % months;
-    if (clockwiseDist <= months / 2) return "late"; // right of peak
-    return "early";                                 // left of peak
-  });
-
-  console.log(bellCurve.map(v => v.toFixed(2)));
-  console.log(monthStatus);
+function Problem3() {
+  // TODO: Use the puzzle pieces from config (PUZZLE_PIECES_P3) and pass them into <Board>.
+  const pieces = PUZZLE_PIECES_P3;
 
   return (
-    <section className="problem-view">
-      <div className="m-4">
-        <label htmlFor="peak-month-slider" style={{ fontWeight: 600, marginRight: "1rem" }}>
-          Desired Peak Month (0=Jan, 11=Dec):
-        </label>
-        <input
-          id="peak-month-slider"
-          type="range"
-          min="0"
-          max={months - 1}
-          value={desiredPeak}
-          onChange={(e) => setDesiredPeak(Number(e.target.value))}
-          style={{ verticalAlign: "middle", marginRight: "1rem" }}
-        />
-        <span style={{ fontWeight: 500 }}>
-          {desiredPeak}
-        </span>
-      </div>
-      <ul className="m-5 text-lg">
-        {monthStatus.map((value, index) => (
-          <li className={value} key={index}> 
-            {index}: {value}
-          </li>
-        ))}
-      </ul>
+    <section className="problem-view p-6">
+      <h2 className="text-xl font-semibold mb-2">Problem 3: Moving data between components</h2>
+      <p className="text-gray-700 mb-4">
+        Pass <code>pieces</code> from Problem3 to <code>Board</code>; Board passes each <code>piece</code> to <code>PuzzlePiece</code>.
+      </p>
+
+      {/* TODO: Render <Board pieces={pieces} /> so the parent passes data to the child. */}
+      <Board pieces={pieces} />
     </section>
   );
 }

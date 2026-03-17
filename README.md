@@ -3,6 +3,34 @@
 This repository is the **DR03: The Puzzler** React project.  
 It is designed to run easily in **GitHub Codespaces** or on your own machine.
 
+---
+
+### TEACHING OBJECTIVES
+
+By completing this assignment, you will be able to:
+
+- Use **spread (`...`)**, **object literals (`{}`)**, and **array methods** (e.g. `.map()`, `.filter()`) to build and transform data.
+- **Create and reuse React components** that receive props and return JSX.
+- **Move data between components** by passing props from parent to child.
+- **Update state** with `useState` so the UI reacts to user actions.
+- Implement **drag and drop** using the browser’s Drag and Drop API.
+- **Snap** draggable pieces to a grid so the puzzle has a clear layout.
+
+### OVERVIEW
+
+In this assignment, you will build a **fully functional jigsaw-style puzzle UI** across six problems. Each problem focuses on one React or JavaScript concept; together they lead to a working puzzle you can drag, drop, and snap to a grid.
+
+You will:
+
+- **Problems 1–3:** Build puzzle data with spread and array methods, create a `PuzzlePiece` component, and pass piece data from parent to child components.
+- **Problem 4:** Use **state** to hold piece order and react to a “Shuffle” (or similar) action.
+- **Problem 5:** Add **drag and drop** so pieces can be moved between slots.
+- **Problem 6:** Implement **snap to grid** so dropped pieces align to fixed slots.
+
+The problems are in **`src/problems/problem-1.jsx`** through **`problem-6.jsx`**. Use the dropdown in the app to switch between them. Complete each in order; later problems build on the same puzzle structure.
+
+---
+
 The project uses:
 - **React 18**
 - **Vite** as the build tool
@@ -147,7 +175,7 @@ Resulting file: `Ada_Lovelace_CSE3340-Semester-Feb-23.zip`.
 
 Students should work in **`src/problems/`**:
 
-- **`src/problems/problem-1.jsx`** through **`problem-5.jsx`** – one file per assignment. Implement each problem in its file; import and use your own components as needed.
+- **`src/problems/problem-1.jsx`** through **`problem-6.jsx`** – one file per assignment. Implement each problem in its file; import and use your own components as needed.
 - **`src/styles.css`** – adjust global or problem styling if needed.
 
 The root page uses a dropdown that lists every `problem-*.jsx` in `src/problems/`. Your last selection is saved in the browser and auto-loads next time. Do not edit `src/App.jsx` or the build config unless instructed.
