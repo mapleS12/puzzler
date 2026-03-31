@@ -126,7 +126,10 @@ function Problem6() {
     }
     const fromIndex = slotIds.indexOf(pieceId);
     const next = slotIds.slice();
-    [next[fromIndex], next[index]] = [next[index], next[fromIndex]];
+    if (fromIndex === -1) {
+      next[index] = pieceId;
+    } else { [next[fromIndex], next[index]] = [next[index], next[fromIndex]]; }
+    // [next[fromIndex], next[index]] = [next[index], next[fromIndex]];
     setSlotIds(next);
 
   };
