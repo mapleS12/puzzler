@@ -27,7 +27,11 @@ function PuzzlePiece({ piece }) {
 
 // TODO: Create Board component that receives { pieces }. Return a div with className "grid grid-cols-2 gap-3 w-fit". Inside, map over pieces and render <PuzzlePiece key={piece.id} piece={piece} /> for each.
 function Board({ pieces }) {
-  return null;
+  return (
+    <div className="grid grid-cols-2 gap-3 w-fit">
+      {pieces.map((piece) => (<PuzzlePiece key={piece.id} piece={piece} />))}
+    </div>
+  );
 }
 
 function Problem3() {
